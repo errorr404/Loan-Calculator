@@ -1,9 +1,21 @@
 // Listen for submit
-document.getElementById('calculatebutton').addEventListener('click',calculateResult);
+document.getElementById('calculatebutton').addEventListener('click',function(e){
+  // hide results
+  document.getElementById('results').style.display='none'; 
 
+ // show loader
+ document.getElementById('loading').style.display='block'; 
 
+ setTimeout(calculateResult,2000);
+
+ e.preventDefault();
+});
+
+/*
+
+*/
 // Calculate result
-function calculateResult(e){
+function calculateResult(){
 //alert('Button pressed');
 // collect all variables
 const amount =  document.getElementById('amount');
@@ -29,13 +41,21 @@ monthlyPayment.value = monthly.toFixed(2);
 totalPayment.value = (monthly * calculatePayment).toFixed(2);
 
 totalIntrest.value = ((monthly * calculatePayment)- principle).toFixed(2);
+
+
+ // loading results
+ document.getElementById('results').style.display='block'; 
+
+ // hide loader
+ document.getElementById('loading').style.display='none'; 
 }
 else{
   showError('Please check your number');
+  document.getElementById('loading').style.display='none';
 }
 
 
-  e.preventDefault();
+
 }
 
 // show error
